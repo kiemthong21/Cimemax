@@ -14,6 +14,7 @@ import java.util.Date;
 public class User {
     //Role = 1 (User)
     //Role = 2 (Admin)  
+    
     private  int id;
     private String fullname;
     private  String email;
