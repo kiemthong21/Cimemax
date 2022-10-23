@@ -36,6 +36,10 @@
         <servlet-name>filmController</servlet-name>
         <url-pattern>/film</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>homeController</servlet-name>
+        <url-pattern>/homeController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

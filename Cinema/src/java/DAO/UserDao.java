@@ -7,7 +7,7 @@ package DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -73,14 +73,52 @@ public class UserDao extends DBContext {
         return null;
     }
 
-    public int register(int id, String fullname, String email, String password,
+    public int register(String fullname, String email, String password,
             boolean gender, String phone, String address, int role,
             String avatar, Date DOB) {
+        String pass = md5.getMd5(password);
+        try {
+            String sql = "INSERT INTO [dbo].[user]\n"
+                    + "           ([fullname]\n"
+                    + "           ,[email]\n"
+                    + "           ,[password]\n"
+                    + "           ,[gender]\n"
+                    + "           ,[phone]\n"
+                    + "           ,[address]\n"
+                    + "           ,[role]\n"
+                    + "           ,[avatar]\n"
+                    + "           ,[DOB])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, fullname);
+            stm.setString(2, email);
+            stm.setString(3, pass);
+            stm.setBoolean(4, gender);
+            stm.setString(5, phone);
+            stm.setString(6, address);
+            stm.setInt(7, 1);
+            stm.setString(8, null);
+            stm.setDate(9, DOB);
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
         return 1;
     }
 
     public static void main(String[] args) {
         UserDao us = new UserDao();
-        System.out.println(us.findUser("test1@gmail.com", "123"));
+        System.out.println(us.register("thong", "thong2001", "123", true, "0886969888", "VietNam", 0, null, Date.valueOf("2001-08-08")));
+
     }
 }

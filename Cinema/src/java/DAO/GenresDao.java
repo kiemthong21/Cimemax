@@ -26,7 +26,7 @@ public class GenresDao extends DBContext {
         try {
             PreparedStatement stm = connection.prepareCall(sql);
             ResultSet rs = stm.executeQuery();
-            while (rs != null) {
+            while (rs.next()) {
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreID"));
                 gen.setName(rs.getString("name"));
@@ -37,6 +37,11 @@ public class GenresDao extends DBContext {
             Logger.getLogger(GenresDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-
+    }
+    
+    public static void main(String[] args) {
+        GenresDao db = new GenresDao();
+        List<Genres> gen = db.getAllGenres();
+        System.out.println(gen.size());
     }
 }

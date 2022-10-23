@@ -57,7 +57,7 @@
                                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div class="card-body p-4 p-lg-5 text-black">
 
-                                        <form>
+                                        <form method="post" action="loginController">
 
                                             <div class="d-flex align-items-center mb-3 pb-1" >
                                                 <h1>Cinema</h1>
@@ -68,18 +68,18 @@
 
                                             <div class="form-outline mb-4">
                                                 <input type="email" id="form2Example17"
-                                                       class="form-control form-control-lg" placeholder="Email address"/>
+                                                       class="form-control form-control-lg" placeholder="Email address" name="email"/>
                                                 <label class="form-label" for="form2Example17">Email address</label>
                                             </div>
 
                                             <div class="form-outline mb-4">
                                                 <input type="password" id="form2Example27"
-                                                       class="form-control form-control-lg" placeholder="Password"/>
+                                                       class="form-control form-control-lg" placeholder="Password" name="pass"/>
                                                 <label class="form-label" for="form2Example27">Password</label>
                                             </div>
 
                                             <div class="pt-1 mb-4">
-                                                <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                                                <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                             </div>
 
                                             <a class="small text-muted" href="#!">Forgot password?</a>

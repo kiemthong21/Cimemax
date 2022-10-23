@@ -10,30 +10,30 @@ package model;
  * @author int.thong.nk
  */
 public class Country {
-    private int code;
-    private int countryName;
+    private String code;
+    private String countryName;
 
     public Country() {
     }
 
-    public Country(int code, int countryName) {
+    public Country(String code, String countryName) {
         this.code = code;
         this.countryName = countryName;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
-    public int getCountryName() {
+    public String getCountryName() {
         return countryName;
     }
 
-    public void setCountryName(int countryName) {
+    public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 

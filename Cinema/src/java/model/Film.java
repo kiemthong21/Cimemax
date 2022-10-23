@@ -15,14 +15,15 @@ import java.util.List;
 public class Film {
 
     private int filmId;
-    private List<Genres> genres;
+    private Genres genres;
     private String title;
     private Date premiere;
     private String image;
+    
     private String actor;
     private Country country;
     private String author;
-    private long time;
+    private int time;
     private String imageSlide;
 
     public Film() {
@@ -36,9 +37,9 @@ public class Film {
         this.imageSlide = imageSlide;
     }
 
-    public Film(int filmId, List<Genres> genres, String title, Date premiere,
+    public Film(int filmId, Genres genres, String title, Date premiere,
             String image, String actor, Country country, String author,
-            long time, String imageSlide) {
+            int time, String imageSlide) {
         this.filmId = filmId;
         this.genres = genres;
         this.title = title;
@@ -59,11 +60,11 @@ public class Film {
         this.filmId = filmId;
     }
 
-    public List<Genres> getGenres() {
+    public Genres getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genres> genres) {
+    public void setGenres(Genres genres) {
         this.genres = genres;
     }
 
@@ -123,11 +124,11 @@ public class Film {
         this.author = author;
     }
 
-    public long getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
