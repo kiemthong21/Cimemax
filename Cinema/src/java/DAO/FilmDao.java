@@ -94,12 +94,110 @@ public class FilmDao extends DBContext {
             Logger.getLogger(FilmDao.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
-         return 1;
+        return 1;
+    }
+
+    public Film getFilmByID(int filmId) {
+        try {
+            String sql = "select * from Films f \n"
+                    + "left join Genres g on f.GenreID = g.GenreID \n"
+                    + "left join Countries c on f.CountryCode = c.CountryCode \n"
+                    + "where user_id = ?";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setInt(1, filmId);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Film fl = new Film();
+                fl.setFilmId(rs.getInt("FilmID"));
+                fl.setTitle(rs.getString("title"));
+                fl.setImage(rs.getString("img"));
+                fl.setImageSlide(rs.getString("images_slide"));
+                fl.setActor(rs.getString("actor"));
+                fl.setAuthor(rs.getString("author"));
+                Genres gen = new Genres();
+                gen.setGenresId(rs.getInt("GenreId"));
+                gen.setName(rs.getString("name"));
+                fl.setGenres(gen);
+                Country country = new Country();
+                country.setCode(rs.getString("CountryCode"));
+                country.setCountryName(rs.getString("CountryName"));
+                fl.setCountry(country);
+                return fl;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<Film> getFilmByCategory(int genreId) {
+        List<Film> films = new ArrayList<>();
+        try {
+            String sql = "select * from Films f \n"
+                    + "left join Genres g on f.GenreID = g.GenreID \n"
+                    + "left join Countries c on f.CountryCode = c.CountryCode"
+                    + "where f.GenreID = ?";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setInt(1, genreId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Film fl = new Film();
+                fl.setFilmId(rs.getInt("FilmID"));
+                fl.setTitle(rs.getString("title"));
+                fl.setImage(rs.getString("img"));
+                fl.setImageSlide(rs.getString("images_slide"));
+                fl.setActor(rs.getString("actor"));
+                fl.setAuthor(rs.getString("author"));
+                Genres gen = new Genres();
+                gen.setGenresId(rs.getInt("GenreId"));
+                gen.setName(rs.getString("name"));
+                fl.setGenres(gen);
+                Country country = new Country();
+                country.setCode(rs.getString("CountryCode"));
+                country.setCountryName(rs.getString("CountryName"));
+                fl.setCountry(country);
+                films.add(fl);
+            }
+            return films;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
-//    public int updateFilm(){
-//     String sql = 
-//    }
+     public List<Film> getFilmByTop(int top) {
+        List<Film> films = new ArrayList<>();
+        try {
+            String sql = "select top ? * from Films f \n"
+                    + "left join Genres g on f.GenreID = g.GenreID \n"
+                    + "left join Countries c on f.CountryCode = c.CountryCode";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setInt(1, top);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Film fl = new Film();
+                fl.setFilmId(rs.getInt("FilmID"));
+                fl.setTitle(rs.getString("title"));
+                fl.setImage(rs.getString("img"));
+                fl.setImageSlide(rs.getString("images_slide"));
+                fl.setActor(rs.getString("actor"));
+                fl.setAuthor(rs.getString("author"));
+                Genres gen = new Genres();
+                gen.setGenresId(rs.getInt("GenreId"));
+                gen.setName(rs.getString("name"));
+                fl.setGenres(gen);
+                Country country = new Country();
+                country.setCode(rs.getString("CountryCode"));
+                country.setCountryName(rs.getString("CountryName"));
+                fl.setCountry(country);
+                films.add(fl);
+            }
+            return films;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 
     public static void main(String[] args) {
         FilmDao db = new FilmDao();

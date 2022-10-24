@@ -73,6 +73,33 @@ public class UserDao extends DBContext {
         return null;
     }
 
+    public User findUser(int userId, String password) {
+        try {
+            String sql = "select * from [User] where [user_id] = ? and [Password] = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            stm.setString(2, md5.getMd5(password));
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                User s = new User();
+                s.setId(rs.getInt("user_id"));
+                s.setFullname(rs.getString("fullName"));
+                s.setEmail(rs.getString("Email"));
+                s.setPassword(rs.getString("Password"));
+                s.setGender(rs.getBoolean("Gender"));
+                s.setPhone(rs.getString("Phone"));
+                s.setAvatar(rs.getString("Avatar"));
+                s.setAddress(rs.getString("Address"));
+                s.setRole(rs.getInt("role"));
+                s.setDOB(rs.getDate("DOB"));
+                return s;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public int register(String fullname, String email, String password,
             boolean gender, String phone, String address, int role,
             String avatar, Date DOB) {
@@ -116,9 +143,51 @@ public class UserDao extends DBContext {
         return 1;
     }
 
+    public int updateUser(String password, int uid) {
+        String pass = md5.getMd5(password);
+        try {
+            String sql = "UPDATE [dbo].[User]\n"
+                    + "   SET [password] = ?\n"
+                    + "WHERE [User].UserID =?";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setString(1, pass);
+            stm.setInt(2, uid);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+        return 1;
+    }
+
+    public int updateUser(String name, boolean gender, String phone, String address, String avatar, Date dob, int userId) {
+        try {
+            String sql = "UPDATE [dbo].[User]\n"
+                    + "   SET [fullname] = ?\n"
+                    + "      ,[gender] = ?\n"
+                    + "      ,[phone] = ?\n"
+                    + "      ,[address] = ?\n"
+                    + "      ,[avatar] = ?\n"
+                    + "      ,[DOB] = ?\n"
+                    + "WHERE [User].UserID =?";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setString(1, name);
+            stm.setBoolean(2, gender);
+            stm.setString(3, phone);
+            stm.setString(4, address);
+            stm.setString(5, avatar);
+            stm.setDate(6, dob);
+            stm.setInt(7, userId);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+        return 1;
+    }
+
     public static void main(String[] args) {
         UserDao us = new UserDao();
         System.out.println(us.register("thong", "thong2001", "123", true, "0886969888", "VietNam", 0, null, Date.valueOf("2001-08-08")));
-
     }
 }

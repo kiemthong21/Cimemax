@@ -32,7 +32,8 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
@@ -175,40 +176,43 @@
   <!-- end offer section -->
 
   <!--movie hot-->
-  <section class="text-center mt-5 slidemoviehot">
+  <section class="container text-center mt-5 slidemoviehot">
     <h2>
       Movie Hot In Month
     </h2>
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-          aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-          aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-          aria-label="Slide 3"></button>
+    <div class="d-flex justify-content-center">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner movie">
+          <div class="carousel-item active">
+            <img src="images/describe-your-favorite-movie-avengers-endgame-1024x576.jpg" class="d-block w-100"
+             style="width: 100px;" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="images/share.png" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="images/kisspng-movie-icons-film-cinema-5afb7b67901b56.5773899315264305675903.jpg" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <div class="carousel-inner movie">
-        <div class="carousel-item active">
-          <img  src="images/describe-your-favorite-movie-avengers-endgame-1024x576.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="images/share.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="images/kisspng-movie-icons-film-cinema-5afb7b67901b56.5773899315264305675903.jpg" class="d-block w-100" alt="...">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </section>
 
@@ -225,7 +229,7 @@
       <!--menu category-->
       <ul class="filters_menu">
         <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">Burger</li>
+        <li data-filter=".dog">Dog</li>
         <li data-filter=".pizza">Pizza</li>
         <li data-filter=".pasta">Pasta</li>
         <li data-filter=".fries">Fries</li>
@@ -241,11 +245,8 @@
         <li data-filter=".pizza">Pizza</li>
         <li data-filter=".pasta">Pasta</li>
         <li data-filter=".fries">Fries</li>
-
       </ul>
-
-
-
+      
       <!-- List Products -->
       <div class="filters-content">
         <div class="row grid">
@@ -326,7 +327,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-lg-4 all pasta">
+          <div class="col-sm-6 col-lg-4 all dog">
             <div class="box">
               <div>
                 <div class="img-box">
@@ -342,7 +343,7 @@
                   </p>
                   <div class="options">
                     <h6>
-                      $18
+                      120
                     </h6>
                     <a href="">
 
@@ -425,7 +426,7 @@
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
-            <img src="images/images.jfif" alt="">
+            <img src="https://img.freepik.com/premium-vector/vector-movie-cinema-poster-popcorn-tape-glasses_208581-1763.jpg?w=2000" alt="">
           </div>
         </div>
         <div class="col-md-6">
@@ -471,10 +472,6 @@
     </div>
   </section>
   <!-- end book section -->
-
-  <!-- client section -->
-
-  <!-- end client section -->
 
   <!-- footer section -->
   <footer class="footer_section">
