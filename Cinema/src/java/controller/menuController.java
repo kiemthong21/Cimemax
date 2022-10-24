@@ -5,12 +5,17 @@
  */
 package controller;
 
+import DAO.FilmDao;
+import DAO.GenresDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Film;
+import model.Genres;
 
 /**
  *
@@ -35,7 +40,7 @@ public class menuController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet menuController</title>");            
+            out.println("<title>Servlet menuController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet menuController at " + request.getContextPath() + "</h1>");
@@ -56,7 +61,13 @@ public class menuController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("view/user/menufilm.jsp").forward(request, response);
+        FilmDao filmDb = new FilmDao();
+        List<Film> films = filmDb.getFilmByTop(6);
+        GenresDao genDao = new GenresDao();
+        List<Genres> genres = genDao.getAllGenres();
+        request.setAttribute("films", films);
+        request.setAttribute("genres", genres);
+        request.getRequestDispatcher("view/user/menufilm.jsp").forward(request, response);
     }
 
     /**

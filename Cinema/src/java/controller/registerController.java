@@ -5,12 +5,15 @@
  */
 package controller;
 
+import DAO.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import model.User;
 
 /**
  *
@@ -35,7 +38,7 @@ public class registerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet registerController</title>");            
+            out.println("<title>Servlet registerController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet registerController at " + request.getContextPath() + "</h1>");
@@ -56,7 +59,7 @@ public class registerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("view/user/register.jsp").forward(request, response);
+        request.getRequestDispatcher("view/user/register.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +73,28 @@ public class registerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+        String rePass = request.getParameter("repass");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        boolean gender = request.getParameter("gender").equals("true") ? true : false;
+        Date dob = Date.valueOf(request.getParameter("dob"));
+        UserDao db = new UserDao();
+        User u = db.findUser(email);
+        if (u != null) {
+            request.getRequestDispatcher("view/user/register.jsp").forward(request, response);
+            return;
+        }
+        if (!pass.equals(rePass)) {
+            request.getRequestDispatcher("view/user/register.jsp").forward(request, response);
+            return;
+        } else {
+            db.register(name, email, pass, gender, phone, address, 1, null, dob);
+            response.sendRedirect("loginController");
+            return;
+        }
     }
 
     /**

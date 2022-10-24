@@ -78,7 +78,7 @@
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline" style="width: 92%;">
                                                         <input type="password" id="form3Example1n1" required placeholder="Confirm Password"
-                                                               class="form-control form-control-lg" name = "re-pass/>
+                                                               class="form-control form-control-lg" name = "repass"/>
                                                         <label class="form-label" for="form3Example1n1">Confirm Password</label>
                                                     </div>
                                                 </div>
@@ -101,13 +101,13 @@
                                                 <h6 class="mb-0 me-4">Gender: </h6>
 
                                                 <div class="form-check form-check-inline mb-0 me-4 ">
-                                                    <input class="form-check-input m-sm-1" type="radio" name="inlineRadioOptions"
+                                                    <input class="form-check-input m-sm-1" type="radio"
                                                            id="femaleGender" value="false" name = "gender"/>
                                                     <label class="form-check-label" for="femaleGender">Female</label>
                                                 </div>
 
                                                 <div class="form-check form-check-inline mb-0 me-4">
-                                                    <input class="form-check-input m-sm-1" type="radio" name="inlineRadioOptions"
+                                                    <input class="form-check-input m-sm-1" type="radio" 
                                                            id="maleGender" value="true" name = "gender" />
                                                     <label class="form-check-label" for="maleGender">Male</label>
                                                 </div>
