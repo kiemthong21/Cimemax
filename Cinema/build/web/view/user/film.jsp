@@ -4,6 +4,7 @@
     Author     : int.thong.nk
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,34 +37,26 @@
                     <div class="col-lg-7 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h1 class="h2">Active Wear</h1>
-                                <p class="py-2">
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-warning"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <span class="list-inline-item text-dark">Rating 4.8</span>
-                                </p>
+                                <h1 class="h2">${requestScope.film.title}</h1>
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
-                                        <h6>Brand:</h6>
+                                        <h6>Genres:</h6>
                                     </li>
                                     <li class="list-inline-item">
-                                        <p class="text-muted"><strong>Easy Wear, Horor, Actions.</strong></p>
+                                        <p class="text-muted">
+                                            <strong>${requestScope.film.genres.name}</strong>
+                                        </p>
                                     </li>
                                 </ul>
 
                                 <h6>Description:</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt
-                                    ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum
-                                    convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
+                                <p>${requestScope.description}</p>
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
                                         <h6>Author :</h6>
                                     </li>
                                     <li class="list-inline-item">
-                                        <p class="text-muted"><strong>Michalen Jonhat</strong></p>
+                                        <p class="text-muted"><strong>${requestScope.film.author}</strong></p>
                                     </li>
                                 </ul>
 
@@ -73,20 +66,15 @@
                                     </li>
                                     <li class="list-inline-item">
                                         <p class="text-muted">
-                                            <strong>Michalen Jonhat, </strong>
-                                            <strong>Michalen Jonhat, </strong>
-                                            <strong>Michalen Jonhat, </strong>
-                                            <strong>Michalen Jonhat, </strong>
-                                            <strong>Michalen Jonhat, </strong>
+                                            <strong>${requestScope.film.actor} </strong>
                                         </p>
                                     </li>
                                 </ul>
 
-                                <h6>Movie duration: 120 minute</h6>
-                                <h6>Language: English</h6>
+                                <h6>Movie duration: ${requestScope.film.time}</h6>
+                                <h6>Language: </h6>
 
                                 <form action="" method="GET">
-                                    <input type="hidden" name="product-title" value="Activewear">
                                     <div class="row pb-3">
                                         <div class="col d-grid">
                                             <button type="submit" class="btn btn-success btn-lg" name="submit"

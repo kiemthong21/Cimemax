@@ -39,6 +39,7 @@ public class FilmDao extends DBContext {
                 fl.setImageSlide(rs.getString("images_slide"));
                 fl.setActor(rs.getString("actor"));
                 fl.setAuthor(rs.getString("author"));
+                fl.setDescription(rs.getString("description"));
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreId"));
                 gen.setName(rs.getString("name"));
@@ -57,7 +58,7 @@ public class FilmDao extends DBContext {
     }
 
     public int registerFilm(int genID, String title, String code, String image,
-            Date premiere, String actor, String author, int time, String image_slide) {
+            Date premiere, String actor, String author, int time, String image_slide, String description) {
         try {
             String sql = "INSERT INTO [dbo].[Films]\n"
                     + "           ([GenreID]\n"
@@ -68,9 +69,11 @@ public class FilmDao extends DBContext {
                     + "           ,[actor]\n"
                     + "           ,[author]\n"
                     + "           ,[time]\n"
+                    + "           ,[description]\n"
                     + "           ,[images_slide])\n"
                     + "     VALUES\n"
                     + "           (?\n"
+                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
@@ -88,7 +91,8 @@ public class FilmDao extends DBContext {
             stm.setString(6, actor);
             stm.setString(7, author);
             stm.setInt(8, time);
-            stm.setString(9, image_slide);
+            stm.setString(9, description);
+            stm.setString(10, image_slide);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(FilmDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,7 +106,7 @@ public class FilmDao extends DBContext {
             String sql = "select * from Films f \n"
                     + "left join Genres g on f.GenreID = g.GenreID \n"
                     + "left join Countries c on f.CountryCode = c.CountryCode \n"
-                    + "where user_id = ?";
+                    + "where filmID = ?";
             PreparedStatement stm = connection.prepareCall(sql);
             stm.setInt(1, filmId);
             ResultSet rs = stm.executeQuery();
@@ -114,6 +118,7 @@ public class FilmDao extends DBContext {
                 fl.setImageSlide(rs.getString("images_slide"));
                 fl.setActor(rs.getString("actor"));
                 fl.setAuthor(rs.getString("author"));
+                fl.setDescription(rs.getString("description"));
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreId"));
                 gen.setName(rs.getString("name"));
@@ -148,6 +153,7 @@ public class FilmDao extends DBContext {
                 fl.setImageSlide(rs.getString("images_slide"));
                 fl.setActor(rs.getString("actor"));
                 fl.setAuthor(rs.getString("author"));
+                fl.setDescription(rs.getString("description"));
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreId"));
                 gen.setName(rs.getString("name"));
@@ -164,15 +170,14 @@ public class FilmDao extends DBContext {
             return null;
         }
     }
-    
-     public List<Film> getFilmByTop(int top) {
+
+    public List<Film> getNewFilmTop6() {
         List<Film> films = new ArrayList<>();
         try {
-            String sql = "select top ? * from Films f \n"
+            String sql = "select top 6 * from Films f \n"
                     + "left join Genres g on f.GenreID = g.GenreID \n"
                     + "left join Countries c on f.CountryCode = c.CountryCode";
             PreparedStatement stm = connection.prepareCall(sql);
-            stm.setInt(1, top);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Film fl = new Film();
@@ -182,6 +187,7 @@ public class FilmDao extends DBContext {
                 fl.setImageSlide(rs.getString("images_slide"));
                 fl.setActor(rs.getString("actor"));
                 fl.setAuthor(rs.getString("author"));
+                fl.setDescription(rs.getString("description"));
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreId"));
                 gen.setName(rs.getString("name"));
@@ -201,7 +207,7 @@ public class FilmDao extends DBContext {
 
     public static void main(String[] args) {
         FilmDao db = new FilmDao();
-        int fl = db.registerFilm(3, "Hello ae", "VNM", null, Date.valueOf("2022-01-01"), "abc", "author", 120, null);
+        Film fl = db.getFilmByID(1);
         System.out.println(fl);
     }
 }

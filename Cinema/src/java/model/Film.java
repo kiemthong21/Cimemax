@@ -19,12 +19,21 @@ public class Film {
     private String title;
     private Date premiere;
     private String image;
-    
+
     private String actor;
     private Country country;
     private String author;
     private int time;
     private String imageSlide;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Film() {
     }

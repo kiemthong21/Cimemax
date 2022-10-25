@@ -62,15 +62,17 @@
                                         </div>
                                     </div>
                                 </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-                    <div class="btn-box">
-                        <a href="">
-                            View More
-                        </a>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
+                <div class="btn-box">
+                    <a href="">
+                        View More
+                    </a>
+                </div>
+            </div>
+
         </section>
 
         <!-- end food section -->

@@ -62,7 +62,7 @@ public class menuController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         FilmDao filmDb = new FilmDao();
-        List<Film> films = filmDb.getFilmByTop(6);
+        List<Film> films = filmDb.getAllFilm();
         GenresDao genDao = new GenresDao();
         List<Genres> genres = genDao.getAllGenres();
         request.setAttribute("films", films);
