@@ -1,9 +1,11 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
+import DAO.MD5;
 import DAO.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +19,7 @@ import model.User;
  *
  * @author Admin
  */
-public class loginController extends HttpServlet {
+public class changePassController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +38,10 @@ public class loginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet loginController</title>");
+            out.println("<title>Servlet changePassController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<img src=view/images/cinema.jpg/>");
+            out.println("<h1>Servlet changePassController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +59,7 @@ public class loginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/user/loginjsp.jsp").forward(request, response);
+        request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
     }
 
     /**
@@ -71,17 +73,30 @@ public class loginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
+        String opass = request.getParameter("opass");
+        String npass = request.getParameter("npass");
+        String cpass = request.getParameter("cpass");
+        int userId = (int) request.getSession().getAttribute("id");
         UserDao db = new UserDao();
-        User user = db.findUser(email, pass);
-        if (user != null) {
-            request.getSession().setAttribute("id", user.getId());
-            response.sendRedirect("homeController");
-        } else {
-            response.sendRedirect("loginController");
+        User user = db.findUser(userId);
+        MD5 md5 = new MD5();
+        if (!md5.getMd5(opass).equals(user.getPassword())) {
+            request.setAttribute("mess", "Old Password is not correct.");
+            System.out.println("1");
+            request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
+            return;
         }
-
+        if (!npass.equals(cpass)) {
+            System.out.println("2");
+            request.setAttribute("mess", "Confirm password does not match the new password.");
+            request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
+            return;
+        }
+        System.out.println("3");
+        int statusChangePass = db.updateUser(npass, userId);
+        request.setAttribute("mess", "Change password successfull");
+        request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
+        return;
     }
 
     /**

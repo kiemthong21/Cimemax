@@ -23,7 +23,8 @@
                 <div class="row">
                     <div class="col-lg-5 mt-5">
                         <div class="card mb-3">
-                            <img class="card-img img-fluid" src="https://m.media-amazon.com/images/M/MV5BYjUyN2VlZGEtNGEyZC00YjViLTgwYmQtZDJiM2FlOTU3Mjg2XkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_FMjpg_UX1000_.jpg" alt="Card image cap"
+                            <img class="card-img img-fluid" 
+                                 src="view/images/${requestScope.film.image}" alt="Card image cap"
                                  id="product-detail">
                         </div>
                         <div class="row">
@@ -50,7 +51,7 @@
                                 </ul>
 
                                 <h6>Description:</h6>
-                                <p>${requestScope.description}</p>
+                                <p>${requestScope.film.description}</p>
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
                                         <h6>Author :</h6>
@@ -71,8 +72,8 @@
                                     </li>
                                 </ul>
 
-                                <h6>Movie duration: ${requestScope.film.time}</h6>
-                                <h6>Language: </h6>
+                                <h6>Movie duration: ${requestScope.film.time} minute</h6>
+                                <h6>Language: ${requestScope.film.country.countryName}</h6>
 
                                 <form action="" method="GET">
                                     <div class="row pb-3">

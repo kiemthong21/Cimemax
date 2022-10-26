@@ -84,6 +84,5 @@
         <!--Script-->
         <%@include file="../component/setupJS.jsp" %>
         <!--Script-->
-        <h1>Hello World!</h1>
     </body>
 </html>

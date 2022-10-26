@@ -40,6 +40,7 @@ public class FilmDao extends DBContext {
                 fl.setActor(rs.getString("actor"));
                 fl.setAuthor(rs.getString("author"));
                 fl.setDescription(rs.getString("description"));
+                fl.setTime(rs.getInt("time"));
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreId"));
                 gen.setName(rs.getString("name"));
@@ -119,6 +120,7 @@ public class FilmDao extends DBContext {
                 fl.setActor(rs.getString("actor"));
                 fl.setAuthor(rs.getString("author"));
                 fl.setDescription(rs.getString("description"));
+                fl.setTime(rs.getInt("time"));
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreId"));
                 gen.setName(rs.getString("name"));
@@ -154,6 +156,7 @@ public class FilmDao extends DBContext {
                 fl.setActor(rs.getString("actor"));
                 fl.setAuthor(rs.getString("author"));
                 fl.setDescription(rs.getString("description"));
+                fl.setTime(rs.getInt("time"));
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreId"));
                 gen.setName(rs.getString("name"));
@@ -188,6 +191,7 @@ public class FilmDao extends DBContext {
                 fl.setActor(rs.getString("actor"));
                 fl.setAuthor(rs.getString("author"));
                 fl.setDescription(rs.getString("description"));
+                fl.setTime(rs.getInt("time"));
                 Genres gen = new Genres();
                 gen.setGenresId(rs.getInt("GenreId"));
                 gen.setName(rs.getString("name"));

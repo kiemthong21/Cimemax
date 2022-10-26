@@ -20,6 +20,10 @@
         <servlet-name>homeController</servlet-name>
         <servlet-class>controller.homeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>changePassController</servlet-name>
+        <servlet-class>controller.changePassController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/loginController</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>homeController</servlet-name>
         <url-pattern>/homeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changePassController</servlet-name>
+        <url-pattern>/changePassController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
