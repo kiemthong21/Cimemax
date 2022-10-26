@@ -23,15 +23,13 @@ public class User {
     private String phone;
     private String address;
     private int role;
-    private String avatar;
     private Date DOB;
 
     public User() {
     }
 
     public User(int id, String fullname, String email, String password,
-            boolean gender, String phone, String address, int role,
-            String avatar, Date DOB) {
+            boolean gender, String phone, String address, int role, Date DOB) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
@@ -40,7 +38,6 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.role = role;
-        this.avatar = avatar;
         this.DOB = DOB;
     }
 
@@ -107,14 +104,6 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
     
      public Date getDOB() {
         return DOB;
@@ -126,7 +115,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", fullname=" + fullname + ", email=" + email + ", password=" + password + ", gender=" + gender + ", phone=" + phone + ", address=" + address + ", role=" + role + ", avatar=" + avatar + ", DOB=" + DOB + '}';
+        return "User{" + "id=" + id + ", fullname=" + fullname + ", email=" + email + ", password=" + password + ", gender=" + gender + ", phone=" + phone + ", address=" + address + ", role=" + role + ", DOB=" + DOB + '}';
     }
     
     

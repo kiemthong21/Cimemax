@@ -24,6 +24,10 @@
         <servlet-name>changePassController</servlet-name>
         <servlet-class>controller.changePassController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>profileController</servlet-name>
+        <servlet-class>controller.profileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/loginController</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>changePassController</servlet-name>
         <url-pattern>/changePassController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profileController</servlet-name>
+        <url-pattern>/profileController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

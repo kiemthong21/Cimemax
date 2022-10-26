@@ -34,7 +34,6 @@ public class UserDao extends DBContext {
                 s.setPassword(rs.getString("Password"));
                 s.setGender(rs.getBoolean("Gender"));
                 s.setPhone(rs.getString("Phone"));
-                s.setAvatar(rs.getString("Avatar"));
                 s.setAddress(rs.getString("Address"));
                 s.setRole(rs.getInt("role"));
                 s.setDOB(rs.getDate("DOB"));
@@ -61,7 +60,6 @@ public class UserDao extends DBContext {
                 s.setPassword(rs.getString("Password"));
                 s.setGender(rs.getBoolean("Gender"));
                 s.setPhone(rs.getString("Phone"));
-                s.setAvatar(rs.getString("Avatar"));
                 s.setAddress(rs.getString("Address"));
                 s.setRole(rs.getInt("role"));
                 s.setDOB(rs.getDate("DOB"));
@@ -88,7 +86,6 @@ public class UserDao extends DBContext {
                 s.setPassword(rs.getString("Password"));
                 s.setGender(rs.getBoolean("Gender"));
                 s.setPhone(rs.getString("Phone"));
-                s.setAvatar(rs.getString("Avatar"));
                 s.setAddress(rs.getString("Address"));
                 s.setRole(rs.getInt("role"));
                 s.setDOB(rs.getDate("DOB"));
@@ -114,7 +111,6 @@ public class UserDao extends DBContext {
                 s.setPassword(rs.getString("Password"));
                 s.setGender(rs.getBoolean("Gender"));
                 s.setPhone(rs.getString("Phone"));
-                s.setAvatar(rs.getString("Avatar"));
                 s.setAddress(rs.getString("Address"));
                 s.setRole(rs.getInt("role"));
                 s.setDOB(rs.getDate("DOB"));
@@ -186,14 +182,13 @@ public class UserDao extends DBContext {
         return 1;
     }
 
-    public int updateUser(String name, boolean gender, String phone, String address, String avatar, Date dob, int userId) {
+    public int updateUser(String name, boolean gender, String phone, String address, Date dob, int userId) {
         try {
             String sql = "UPDATE [dbo].[User]\n"
                     + "   SET [fullname] = ?\n"
                     + "      ,[gender] = ?\n"
                     + "      ,[phone] = ?\n"
                     + "      ,[address] = ?\n"
-                    + "      ,[avatar] = ?\n"
                     + "      ,[DOB] = ?\n"
                     + "WHERE [User].User_id =?";
             PreparedStatement stm = connection.prepareCall(sql);
@@ -201,9 +196,8 @@ public class UserDao extends DBContext {
             stm.setBoolean(2, gender);
             stm.setString(3, phone);
             stm.setString(4, address);
-            stm.setString(5, avatar);
-            stm.setDate(6, dob);
-            stm.setInt(7, userId);
+            stm.setDate(5, dob);
+            stm.setInt(6, userId);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,6 +208,6 @@ public class UserDao extends DBContext {
 
     public static void main(String[] args) {
         UserDao us = new UserDao();
-        System.out.println(us.updateUser("1", 3));
+        System.out.println(us.findUser(3));
     }
 }
