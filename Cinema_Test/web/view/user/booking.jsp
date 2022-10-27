@@ -12,8 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="../component/setupCss.jsp" %>
         <link href="view/css/seat.css" rel="stylesheet" />
-        <c:set var="i" value="1"/>
-        <c:set var="index" value="0"/>
+
     </head>
     <body>
         <!--Header-->
@@ -42,9 +41,19 @@
                         <div class="containers">
                             <div class="screen"></div>
                             <c:forEach var="s" begin="1" end="6" step="1">
+                                <c:set var="index" value="0"/>
                                 <div class="row">
                                     <c:forEach var="a" begin="1" end="8" step="1">
-                                        
+                                        <c:if test=" ${(s-1)*a +a == requestScope.slot.get(index).slotId}">
+                                            <c:if test="${index <  requestScope.slot.size()}">
+                                                <c:set var="index" value="${index + 1}"/>
+                                            </c:if>          
+                                            <div class="seat sold"></div>
+                                        </c:if>
+                                        <c:if test=" ${(s-1)*a +a != requestScope.slot.get(index).slotId}">
+                                            <div class="seat"></div>
+                                        </c:if>
+
                                     </c:forEach>
                                 </div>
                             </c:forEach>
