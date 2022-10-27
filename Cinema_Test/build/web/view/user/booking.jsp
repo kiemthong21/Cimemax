@@ -44,13 +44,13 @@
                                 <c:set var="index" value="0"/>
                                 <div class="row">
                                     <c:forEach var="a" begin="1" end="8" step="1">
-                                        <c:if test=" ${(s-1)*a +a == requestScope.slot.get(index).slotId}">
+                                        <c:if test=" ${((s-1)*a +a) == requestScope.slot.get(0).seatId}">
                                             <c:if test="${index <  requestScope.slot.size()}">
                                                 <c:set var="index" value="${index + 1}"/>
                                             </c:if>          
                                             <div class="seat sold"></div>
                                         </c:if>
-                                        <c:if test=" ${(s-1)*a +a != requestScope.slot.get(index).slotId}">
+                                        <c:if test=" ${((s-1)*a +a) != requestScope.slot.get(index).seatId}">
                                             <div class="seat"></div>
                                         </c:if>
 
