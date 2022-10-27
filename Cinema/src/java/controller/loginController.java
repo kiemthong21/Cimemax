@@ -75,12 +75,13 @@ public class loginController extends HttpServlet {
         String pass = request.getParameter("pass");
         UserDao db = new UserDao();
         User user = db.findUser(email, pass);
-        if(user != null){
-        response.sendRedirect("homeController");
-        }else{
-        response.sendRedirect("loginController");
+        if (user != null) {
+            request.getSession().setAttribute("id", user.getId());
+            response.sendRedirect("homeController");
+        } else {
+            response.sendRedirect("loginController");
         }
-        
+
     }
 
     /**

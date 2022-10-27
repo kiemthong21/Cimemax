@@ -62,15 +62,17 @@
                                         </div>
                                     </div>
                                 </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-                    <div class="btn-box">
-                        <a href="">
-                            View More
-                        </a>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
+                <div class="btn-box">
+                    <a href="">
+                        View More
+                    </a>
+                </div>
+            </div>
+
         </section>
 
         <!-- end food section -->
@@ -82,6 +84,5 @@
         <!--Script-->
         <%@include file="../component/setupJS.jsp" %>
         <!--Script-->
-        <h1>Hello World!</h1>
     </body>
 </html>

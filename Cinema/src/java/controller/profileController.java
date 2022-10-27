@@ -5,18 +5,21 @@
  */
 package controller;
 
+import DAO.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import model.User;
 
 /**
  *
  * @author Admin
  */
-public class homeController extends HttpServlet {
+public class profileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +38,10 @@ public class homeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");            
+            out.println("<title>Servlet profileController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet profileController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +59,11 @@ public class homeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      request.getRequestDispatcher("view/user/home.jsp").forward(request, response);
+        int id = (int) request.getSession().getAttribute("id");
+        UserDao db = new UserDao();
+        User user = db.findUser(id);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("view/user/profile.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +77,18 @@ public class homeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        int id = (int) request.getSession().getAttribute("id");
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        Date dob = Date.valueOf(request.getParameter("dob"));
+        Boolean gender = Boolean.getBoolean(request.getParameter("gender"));
+        UserDao db = new UserDao();
+        int status = db.updateUser(name, gender, phone, address, dob, id);
+        User user = db.findUser(id);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("view/user/profile.jsp").forward(request, response);
+
     }
 
     /**

@@ -5,18 +5,21 @@
  */
 package controller;
 
+import DAO.MD5;
+import DAO.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
  * @author Admin
  */
-public class homeController extends HttpServlet {
+public class changePassController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +38,10 @@ public class homeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");            
+            out.println("<title>Servlet changePassController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet changePassController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +59,7 @@ public class homeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      request.getRequestDispatcher("view/user/home.jsp").forward(request, response);
+        request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +73,30 @@ public class homeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        String opass = request.getParameter("opass");
+        String npass = request.getParameter("npass");
+        String cpass = request.getParameter("cpass");
+        int userId = (int) request.getSession().getAttribute("id");
+        UserDao db = new UserDao();
+        User user = db.findUser(userId);
+        MD5 md5 = new MD5();
+        if (!md5.getMd5(opass).equals(user.getPassword())) {
+            request.setAttribute("mess", "Old Password is not correct.");
+            System.out.println("1");
+            request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
+            return;
+        }
+        if (!npass.equals(cpass)) {
+            System.out.println("2");
+            request.setAttribute("mess", "Confirm password does not match the new password.");
+            request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
+            return;
+        }
+        System.out.println("3");
+        int statusChangePass = db.updateUser(npass, userId);
+        request.setAttribute("mess", "Change password successfull");
+        request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
+        return;
     }
 
     /**
