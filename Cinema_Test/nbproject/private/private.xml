@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/cinema/Cimemax/Cinema_Test/src/java/dao/FilmDao.java</file>
+            <file>file:/D:/cinema/Cimemax/Cinema_Test/src/java/controller/filmController.java</file>
+            <file>file:/D:/cinema/Cimemax/Cinema_Test/src/java/model/Genres.java</file>
+            <file>file:/D:/cinema/Cimemax/Cinema_Test/src/java/model/Country.java</file>
+            <file>file:/D:/cinema/Cimemax/Cinema_Test/src/java/model/Flm.java</file>
+            <file>file:/D:/cinema/Cimemax/Cinema_Test/web/view/adminjsp/newFilm.jsp</file>
+            <file>file:/D:/cinema/Cimemax/Cinema_Test/src/java/dao/SlotDao.java</file>
+        </group>
+    </open-files>
+</project-private>
