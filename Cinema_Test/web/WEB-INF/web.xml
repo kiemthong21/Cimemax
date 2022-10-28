@@ -4,6 +4,15 @@
         <filter-name>LoginFilter</filter-name>
         <filter-class>LoginFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>ADMINFilter</filter-name>
+        <filter-class>ADMINFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ADMINFilter</filter-name>
+        <servlet-name>adController</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <servlet-name>filmController</servlet-name>
@@ -30,6 +39,10 @@
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>controller.NewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>adController</servlet-name>
+        <servlet-class>controller.adController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>bookingController</servlet-name>
         <url-pattern>/bookingController</url-pattern>
@@ -45,6 +58,10 @@
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adController</servlet-name>
+        <url-pattern>/adController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
