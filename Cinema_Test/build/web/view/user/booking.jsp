@@ -21,7 +21,9 @@
 
         <section class="about_section layout_padding">
             <div class="container  ">
-
+                <c:forEach items="${seats}" var="seat">
+                    ${seat.seatId}
+                </c:forEach>
                 <div class="row">
                     <div class="col-md-12 movie-container">
                         <h4 class="text-center" style="margin-top: -200px; margin-bottom: 100px;">
@@ -40,19 +42,29 @@
 
                         <div class="containers">
                             <div class="screen"></div>
+                            <c:set var="i" value="0"/>
+                            <c:set var="index" value="0"/>
                             <c:forEach var="s" begin="1" end="6" step="1">
-                                <c:set var="index" value="0"/>
                                 <div class="row">
                                     <c:forEach var="a" begin="1" end="8" step="1">
-                                        <c:if test=" ${((s-1)*a +a) == requestScope.slot.get(0).seatId}">
-                                            <c:if test="${index <  requestScope.slot.size()}">
-                                                <c:set var="index" value="${index + 1}"/>
-                                            </c:if>          
-                                            <div class="seat sold"></div>
-                                        </c:if>
-                                        <c:if test=" ${((s-1)*a +a) != requestScope.slot.get(index).seatId}">
-                                            <div class="seat"></div>
-                                        </c:if>
+                                        <c:set var="i" value="${i = i+1 }"/>
+
+                          
+
+                                        <c:choose>
+                                            <c:when test="${i == requestScope.seats.get(index).seatId}">
+                                                <div class="seat sold" id="${i}"></div>
+                                                
+
+                                                <c:if test="${index < size -1}">
+                                                    <div hidden="">${index = index + 1}</div>  
+                                                </c:if>
+
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="seat" onclick="select(this)" id="${i}"></div> 
+                                            </c:otherwise>
+                                        </c:choose>
 
                                     </c:forEach>
                                 </div>
@@ -63,10 +75,14 @@
                             You have selected <span id="count">0</span> seat for a price of RS.<span id="total">0</span>
                         </p>
 
+
+
                     </div>
                 </div>
             </div>
         </section>
+
+
 
         <!--Footer->
         <%@include file="../component/footer.jsp" %>

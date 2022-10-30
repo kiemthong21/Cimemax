@@ -45,9 +45,9 @@ public class Seat {
         return "Seat{" + "seatId=" + seatId + ", seatName=" + seatName + '}';
     }
     
-    public static void main(String[] args) {
-        LocalTime time = LocalTime.of(6, 30);
-        time = time.plusMinutes(120);
-        System.out.println(time.compareTo(LocalTime.of(8, 00)));
-    }
+//    public static void main(String[] args) {
+//        LocalTime time = LocalTime.of(6, 30);
+//        time = time.plusMinutes(120);
+//        System.out.println(time.compareTo(LocalTime.of(8, 00)));
+//    }
 }

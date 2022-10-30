@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import ViewMode.FilmSlide;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -206,6 +207,42 @@ public class FilmDao extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(FilmDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+    }
+
+    public List<FilmSlide> getFilmSlideTop3() {
+        List<FilmSlide> films = new ArrayList<>();
+        try {
+            String sql = "select top 3 * from Films f \n"
+                    + "left join Genres g on f.GenreID = g.GenreID \n"
+                    + "left join Countries c on f.CountryCode = c.CountryCode";
+            PreparedStatement stm = connection.prepareCall(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                FilmSlide fl = new FilmSlide();
+                fl.setFilmId(rs.getInt("FilmID"));
+                fl.setTitle(rs.getString("title"));
+                fl.setImageSlide(rs.getString("images_slide"));
+                films.add(fl);
+            }
+            return films;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public int deleteFilm(int film) {
+        try {
+            String sql = "DELETE FROM [dbo].[Films]\n"
+                    + "      WHERE filmId = ?";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setInt(1, film);
+            stm.executeUpdate();
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDao.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         }
     }
 

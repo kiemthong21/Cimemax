@@ -66,6 +66,10 @@ public class SlotDao extends DBcontext {
     
     public static void main(String[] args) {
         SlotDao db = new SlotDao();
-        System.out.println(db.getSeatIsBooking(1).get(0).getSeatId());
+        List<Seat> seat = db.getSeatIsBooking(1);
+        for (Seat se: seat) {
+            System.out.println(se.getSeatId());
+        }
+   
     }
 }

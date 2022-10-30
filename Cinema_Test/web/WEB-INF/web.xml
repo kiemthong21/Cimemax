@@ -23,6 +23,11 @@
         <servlet-name>bookingController</servlet-name>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>NewServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
     <servlet>
         <servlet-name>bookingController</servlet-name>
         <servlet-class>controller.bookingController</servlet-class>

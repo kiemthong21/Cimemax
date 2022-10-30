@@ -5,12 +5,15 @@
  */
 package controller;
 
+import DAO.FilmDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Film;
 
 /**
  *
@@ -35,7 +38,7 @@ public class homeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeController</title>");            
+            out.println("<title>Servlet homeController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet homeController at " + request.getContextPath() + "</h1>");
@@ -56,7 +59,11 @@ public class homeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      request.getRequestDispatcher("view/user/home.jsp").forward(request, response);
+        FilmDao db = new FilmDao();
+        
+        List<Film> film = db.getNewFilmTop6();
+        
+        request.getRequestDispatcher("view/user/home.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +77,7 @@ public class homeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     /**

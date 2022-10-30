@@ -63,8 +63,10 @@ public class bookingController extends HttpServlet {
             throws ServletException, IOException {
         SlotDao sl = new SlotDao();
         List<Seat> slot = sl.getSeatIsBooking(1);
-        request.setAttribute("slot", slot);
-        request.getRequestDispatcher("view/user/booking.jsp").forward(request, response);
+        request.setAttribute("seats", slot);
+        request.setAttribute("size", slot.size());
+     
+       request.getRequestDispatcher("view/user/booking.jsp").forward(request, response);
     }
 
     /**

@@ -99,7 +99,7 @@ public class LoginFilter implements Filter {
             FilterChain chain) throws IOException, ServletException {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
-        if (1 == 1) {
+        if (2 == 1) {
             res.sendRedirect("login");
             return;
         }
