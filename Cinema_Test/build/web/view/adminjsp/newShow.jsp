@@ -33,6 +33,9 @@
                                 <h4 class="text-right">Add Show</h4>
                             </div>
                             <div class="row mt-3">
+                                <div class="alert alert-danger" role="alert">
+                                    A simple primary alert—check it out!
+                                </div>
                                 <div class="col-md-12"><label class="labels">Film</label>
                                     <select name="film" class="form-control">
                                         <option value="filmId">ada kajdk kdnakld adn</option>
