@@ -89,12 +89,14 @@ public class ShowDao extends DBContext {
                     + "           ([showDate]\n"
                     + "           ,[slotId]\n"
                     + "           ,[filmId]\n"
-                    + "           ,[roomId])\n"
+                    + "           ,[roomId]\n"
+                    + "           ,[status])\n"
                     + "     VALUES\n"
                     + "           (?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?)";
+                    + "           ,?\n"
+                    + "           ,1)";
             PreparedStatement stm = connection.prepareCall(sql);
             stm.setDate(1, showDate);
             stm.setInt(2, slotId);
@@ -161,16 +163,20 @@ public class ShowDao extends DBContext {
 
     public List<Show> getShowByCondition(String title, Date date, String order, int page, int pageSize) {
         List<Show> shows = new ArrayList<>();
+        String sDate = "";
+        if (date != null) {
+            sDate = date.toString();
+        }
         try {
             String sql = "  select s.showId, s.showDate, s.slotId, sl.[Time] as slotTime, s.roomId, r.[Name] as roomName,\n"
-                    + "  s.filmId, f.Title from show s left join Films f on s.filmId = f.FilmID \n"
+                    + "  s.filmId, f.Title, s.status from show s left join Films f on s.filmId = f.FilmID \n"
                     + " left join Slot sl  on s.slotId = sl.slotId\n"
                     + "  left join Rooms r on s.roomId = r.RoomID"
-                    + "  where f.Title like ? and s.showDate = ? \n"
+                    + "  where f.Title like ? and s.showDate like ? \n"
                     + " order by " + order + "  offset (?-1)*? row fetch next ? row only";
             PreparedStatement stm = connection.prepareCall(sql);
             stm.setString(1, "%" + title + "%");
-            stm.setDate(2, date);
+            stm.setString(2, "%" + sDate + "%");
             stm.setInt(3, page);
             stm.setInt(4, pageSize);
             stm.setInt(5, pageSize);
@@ -190,6 +196,7 @@ public class ShowDao extends DBContext {
                 f.setFilmId(rs.getInt("filmId"));
                 f.setTitle(rs.getString("title"));
                 s.setFilm(f);
+                s.setStatus(rs.getInt("status"));
                 shows.add(s);
             }
         } catch (SQLException ex) {
@@ -199,12 +206,87 @@ public class ShowDao extends DBContext {
         return shows;
     }
 
+    public Show findShow(int slot, int room, Date date) {
+        try {
+            String sql = "  select s.showId, s.showDate, s.slotId, sl.[Time] as slotTime, s.roomId, r.[Name] as roomName,\n"
+                    + "  s.filmId, f.Title, s.status from show s left join Films f on s.filmId = f.FilmID \n"
+                    + " left join Slot sl  on s.slotId = sl.slotId\n"
+                    + "  left join Rooms r on s.roomId = r.RoomID"
+                    + "  where s.showDate = ? and  s.slotId = ? and s.roomId = ? \n";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setDate(1, date);
+            stm.setInt(2, slot);
+            stm.setInt(3, room);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Show s = new Show();
+                s.setShowId(rs.getInt("showId"));
+                s.setShowDate(rs.getDate("showDate"));
+                Slot sl = new Slot();
+                sl.setId(rs.getInt("slotId"));
+                sl.setTime(rs.getString("slotTime"));
+                s.setSlot(sl);
+                Room r = new Room();
+                r.setRoomId(rs.getInt("roomId"));
+                r.setRoomName(rs.getString("roomName"));
+                s.setRoom(r);
+                Film f = new Film();
+                f.setFilmId(rs.getInt("filmId"));
+                f.setTitle(rs.getString("title"));
+                s.setFilm(f);
+                s.setStatus(rs.getInt("status"));
+                return s;
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public Show findShow(int showId) {
+        try {
+            String sql = "  select s.showId, s.showDate, s.slotId, sl.[Time] as slotTime, s.roomId, r.[Name] as roomName,\n"
+                    + "  s.filmId, f.Title, s.status from show s left join Films f on s.filmId = f.FilmID \n"
+                    + " left join Slot sl  on s.slotId = sl.slotId\n"
+                    + "  left join Rooms r on s.roomId = r.RoomID"
+                    + "  where s.showId = ? \n";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setInt(1, showId);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Show s = new Show();
+                s.setShowId(rs.getInt("showId"));
+                s.setShowDate(rs.getDate("showDate"));
+                Slot sl = new Slot();
+                sl.setId(rs.getInt("slotId"));
+                sl.setTime(rs.getString("slotTime"));
+                s.setSlot(sl);
+                Room r = new Room();
+                r.setRoomId(rs.getInt("roomId"));
+                r.setRoomName(rs.getString("roomName"));
+                s.setRoom(r);
+                Film f = new Film();
+                f.setFilmId(rs.getInt("filmId"));
+                f.setTitle(rs.getString("title"));
+                s.setFilm(f);
+                s.setStatus(rs.getInt("status"));
+                return s;
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         ShowDao db = new ShowDao();
-//        List<Slot> slot = db.getAllSlot();
-//        List<Room> room = db.getAllRoom();
+        List<Slot> slot = db.getAllSlot();
+        List<Room> room = db.getAllRoom();
         List<FilmSlide> film = db.getAllFilmShow();
 //        List<Show> show = db.getShowByCondition("", Date.valueOf("2022-08-08"), "showId asc", 1, 5);
-        System.out.println(film.size());
+//        Show s = db.findShow(1);
+        System.out.println(db.updateShow(Date.valueOf("2022-08-08"), 1, 1, 1, 1));
     }
 }

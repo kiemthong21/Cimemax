@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/web/view/admin/adminDashboard.jsp</file>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/src/java/DAO/UserDao.java</file>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/src/java/ViewMode/FilmSlide.java</file>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/src/java/controller/filmController.java</file>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/src/java/DAO/ShowDao.java</file>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/src/java/DAO/FilmDao.java</file>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/web/index.html</file>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/src/java/model/Show.java</file>
+            <file>file:/C:/WorkFromHome/Cimemax/Cinema/src/java/DAO/GenresDao.java</file>
+        </group>
     </open-files>
 </project-private>

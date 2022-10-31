@@ -18,16 +18,26 @@ public class Show {
     private Film film;
     private Slot slot;
     private Date showDate;
+    private int status;
 
     public Show() {
     }
 
-    public Show(int showId, Room room, Film film, Slot slot, Date showDate) {
+    public Show(int showId, Room room, Film film, Slot slot, Date showDate, int status) {
         this.showId = showId;
         this.room = room;
         this.film = film;
         this.slot = slot;
         this.showDate = showDate;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getShowId() {
@@ -72,7 +82,7 @@ public class Show {
 
     @Override
     public String toString() {
-        return "Show{" + "showId=" + showId + ", room=" + room + ", film=" + film + ", slot=" + slot + ", showDate=" + showDate + '}';
+        return "Show{" + "showId=" + showId + ", room=" + room + ", film=" + film + ", slot=" + slot + ", showDate=" + showDate + ", status=" + status + '}';
     }
 
 }

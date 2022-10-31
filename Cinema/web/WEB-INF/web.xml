@@ -28,6 +28,22 @@
         <servlet-name>profileController</servlet-name>
         <servlet-class>controller.profileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>manageShowController</servlet-name>
+        <servlet-class>controller.admin.manageShowController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createShowController</servlet-name>
+        <servlet-class>controller.admin.createShowController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateShowController</servlet-name>
+        <servlet-class>controller.admin.updateShowController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>chooseSeatController</servlet-name>
+        <servlet-class>controller.chooseSeatController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/loginController</url-pattern>
@@ -55,6 +71,22 @@
     <servlet-mapping>
         <servlet-name>profileController</servlet-name>
         <url-pattern>/profileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>manageShowController</servlet-name>
+        <url-pattern>/manageShowController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createShowController</servlet-name>
+        <url-pattern>/createShowController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateShowController</servlet-name>
+        <url-pattern>/updateShowController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>chooseSeatController</servlet-name>
+        <url-pattern>/chooseSeatController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
