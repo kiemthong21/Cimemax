@@ -98,10 +98,7 @@ public class ADMINFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
              HttpServletResponse res = (HttpServletResponse) response;
-             if(true){
-                res.sendRedirect("NewServlet");
-                return;
-            }
+             
             chain.doFilter(request, response);
        
     }

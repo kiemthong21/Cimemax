@@ -48,6 +48,10 @@
         <servlet-name>adController</servlet-name>
         <servlet-class>controller.adController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addShow</servlet-name>
+        <servlet-class>controller.addShow</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>bookingController</servlet-name>
         <url-pattern>/bookingController</url-pattern>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>adController</servlet-name>
         <url-pattern>/adController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addShow</servlet-name>
+        <url-pattern>/addShow</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
