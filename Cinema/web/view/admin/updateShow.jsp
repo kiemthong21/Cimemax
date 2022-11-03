@@ -84,6 +84,7 @@
 
             </div>
         </div>
+        <%@include file="../component/admin_footer.jsp" %>
         <!-- Section: Design Block -->
     </body>
 

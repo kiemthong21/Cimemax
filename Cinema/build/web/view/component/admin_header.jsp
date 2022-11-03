@@ -32,29 +32,26 @@
 
         <body class="sb-nav-fixed">
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 22px;">
-                <a class="navbar-brand" href="#" style="margin-left: 300px;">Admin</a>
+                <a class="navbar-brand" href="adminDashboardController" style="margin-left: 300px;">Admin</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 380px;">
+                <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 220px;">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link ms-5" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link ms-5" href="adminDashboardController">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ms-4" href="#">Film</a>
+                            <a class="nav-link ms-4" href="manageFilmController?title=&date=&genres=&country=&order=filmId&dimesion=asc&page=1">Film</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ms-4" href="#">Show</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link ms-4" href="#">User</a>
+                            <a class="nav-link ms-4" href="manageShowController?title=&date=&order=showId&dimesion=asc&page=1">Show</a>
                         </li>
                     </ul>
                 </div>
                 <div style="margin-right: 300px;">
-                    <i class="fa fa-solid fa-right-from-bracket"></i>
+                    <a href="logoutController"><i class="fa fa-solid fa-right-from-bracket"></i></a>
                 </div>
             </nav>
         </body>

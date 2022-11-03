@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.FilmDao;
+import ViewMode.FilmSlide;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -60,9 +61,11 @@ public class homeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         FilmDao db = new FilmDao();
-        
         List<Film> film = db.getNewFilmTop6();
-        
+        List<FilmSlide> slide = db.getFilmSlideTop3();
+        response.getWriter().print(slide.get(0).getImageSlide());
+        request.setAttribute("film", film);
+        request.setAttribute("slide", slide);
         request.getRequestDispatcher("view/user/home.jsp").forward(request, response);
     }
 

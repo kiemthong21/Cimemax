@@ -25,6 +25,8 @@ import model.Slot;
  *
  * @author Admin
  */
+
+
 public class createShowController extends HttpServlet {
 
     /**
@@ -72,7 +74,7 @@ public class createShowController extends HttpServlet {
         request.setAttribute("films", films);
         request.setAttribute("slots", slots);
         request.setAttribute("rooms", rooms);
-        request.getRequestDispatcher("view/admin/creatShow.jsp").forward(request, response);
+        request.getRequestDispatcher("view/admin/createShow.jsp").forward(request, response);
     }
 
     /**
@@ -91,7 +93,7 @@ public class createShowController extends HttpServlet {
         int room = Integer.parseInt(request.getParameter("room"));
         Date date = Date.valueOf(request.getParameter("date"));
         ShowDao db = new ShowDao();
-        Show s = db.findShow(slot, room, date);
+        Show s = db.findShow(slot, date);
         if (s != null) {
             request.setAttribute("mess", new Status(400, "Shows are available at this time, please change the time or room."));
             doGet(request, response);
@@ -99,7 +101,7 @@ public class createShowController extends HttpServlet {
         } else {
             int addShow = db.createShow(date, slot, film, room);
             if (addShow == 1) {
-                response.sendRedirect("manageShowController");
+                response.sendRedirect("manageShowController?title=&date=&order=showId&dimesion=asc&page=1");
             } else {
                 response.getWriter().print("error");
             }

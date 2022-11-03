@@ -1,6 +1,7 @@
 
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
     Document   : newjs
     Created on : Oct 20, 2022, 9:28:13 AM
@@ -19,7 +20,7 @@
         <header class="header_section">
             <div class="container">
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="homeController">
                         <span>
                             Cinema
                         </span>
@@ -32,33 +33,36 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav  mx-auto ">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home </a>
+                                <a class="nav-link" href="homeController">Home </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="menu.html">Menu</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="book.html">Book Table <span class="sr-only">(current)</span> </a>
+                                <a class="nav-link" href="menu">Menu</a>
                             </li>
                         </ul>
                         <div class="user_option">
-                            <a href="" class="user_link">
+                            <a href="profileController" class="user_link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
-                            <a class="cart_link" href="#">
+                            
+                            <a class="user_link" href="historyBookingController">
+                                <i class="fa fa-ticket" aria-hidden="true" ></i>
+                            </a>
+                            
+                            <a class="user_link" href="changePassController">
+                                <i class="fa fa-lock" aria-hidden="true" ></i>
+                            </a>
+                            
+                            <c:if test="${sessionScope.id == null}">
+                                <a href="loginController" class="order_online">
+                                    Login
+                                </a> 
+                            </c:if>
+                            <c:if test="${sessionScope.id != null}">
+                                <a href="logoutController" class="order_online">
+                                    logout
+                                </a> 
+                            </c:if>
 
-                            </a>
-                            <form class="form-inline">
-                                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                            <a href="" class="order_online">
-                                Order Online
-                            </a>
                         </div>
                     </div>
                 </nav>

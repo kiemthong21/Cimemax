@@ -206,8 +206,24 @@ public class UserDao extends DBContext {
         return 1;
     }
 
+    public int totalUser() {
+        try {
+            String sql = "select count([user_id]) as count from [user] ";
+            PreparedStatement stm = connection.prepareCall(sql);
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()){
+              int count = rs.getInt("count");
+              return count;
+            }
+            return 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
     public static void main(String[] args) {
         UserDao us = new UserDao();
-        System.out.println(us.findUser(3));
+        System.out.println(us.totalUser());
     }
 }

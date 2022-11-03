@@ -24,36 +24,11 @@
     </head>
 
     <body class="sb-nav-fixed">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 22px;">
-            <a class="navbar-brand" href="#" style="margin-left: 300px;">Admin</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 380px;">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link ms-5" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link ms-4" href="#">Film</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link ms-4" href="#">Show</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link ms-4" href="#">User</a>
-                    </li>
-                </ul>
-            </div>
-            <div style="margin-right: 300px;">
-                <i class="fa fa-solid fa-right-from-bracket"></i>
-            </div>
-        </nav>
+        <%@include file="../component/admin_header.jsp" %>
 
         <div id="layoutSidenav">
             <div id="layoutSidenav_content">
-                <main style="margin-left: 200px; height: 700px;">
+                <main style="margin-left: 200px; height: 540px;">
                     <div class="container-fluid px-4">
                         <h1 class="mt-4 ms-5">Dashboard</h1>
                         <ol class="breadcrumb mb-4 ms-5">
@@ -61,8 +36,29 @@
                         </ol>
                         <div class="row d-flex justify-content-around" style="width: 90%;">
                             <div class="col-md-5">
-                                <div class="card bg-primary text-white mb-4" style="height: 150px;">
-                                    <div class="card-body">Primary Card</div>
+                                <div class="card bg-primary text-white mb-4" >
+                                    <div class="card-body">Total Movies: </div>
+                                    <h3 class="card-body text-center">${totalFilm * 10} Movies</h3>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="manageFilmController?title=&date=&genres=&country=&order=filmId&dimesion=asc&page=1">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="card bg-warning text-white mb-4" >
+                                    <div class="card-body">Total Shows: </div>
+                                    <h3 class="card-body text-center">${totalShow * 100} Shows</h3>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="manageShowController?title=&date=&order=showId&dimesion=asc&page=1">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Total Users: </div>
+                                    <h3 class="card-body text-center">${totalUser * 1000} Users</h3>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -70,26 +66,9 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <div class="card bg-warning text-white mb-4" style="height: 150px;">
-                                    <div class="card-body">Warning Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="card bg-success text-white mb-4" style="height: 150px;">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="card bg-danger text-white mb-4" style="height: 150px;">
-                                    <div class="card-body">Danger Card</div>
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Total revenue: </div>
+                                    <h3 class="card-body text-center">${totalBooking * 1000000}$</h3>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>

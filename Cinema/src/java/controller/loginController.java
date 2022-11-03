@@ -77,11 +77,17 @@ public class loginController extends HttpServlet {
         User user = db.findUser(email, pass);
         if (user != null) {
             request.getSession().setAttribute("id", user.getId());
-            response.sendRedirect("homeController");
+            request.getSession().setAttribute("role", user.getRole());
+            if (user.getRole() == 1) {
+                response.sendRedirect("homeController");
+            } else if (user.getRole() == 0) {
+                response.sendRedirect("adminDashboardController");
+            }
+            
         } else {
             response.sendRedirect("loginController");
         }
-
+        
     }
 
     /**

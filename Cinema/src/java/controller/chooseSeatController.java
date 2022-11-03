@@ -5,7 +5,9 @@
  */
 package controller;
 
+import DAO.BookingDao;
 import DAO.SeatDao;
+import DAO.ShowDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Seat;
+import model.Show;
 
 /**
  *
@@ -60,11 +63,15 @@ public class chooseSeatController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int showId = Integer.valueOf(request.getParameter("showId"));
-        SeatDao db = new SeatDao();
+        BookingDao db = new BookingDao();
+        ShowDao sDB = new ShowDao();
         List<Seat> slot = db.getSeatIsBooking(showId);
+        Show show = sDB.findShow(showId);
+        request.setAttribute("show", show);
         request.setAttribute("seats", slot);
         request.setAttribute("size", slot.size());
-        request.getRequestDispatcher("view/user/chooseSeat.jsp").forward(request, response);
+//        response.getWriter().print(slot.get(0));
+        request.getRequestDispatcher("view/user/chooseSeatShow.jsp").forward(request, response);
     }
 
     /**

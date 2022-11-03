@@ -83,6 +83,7 @@
             </div>
         </div>
         <!-- Section: Design Block -->
+        <%@include file="../component/admin_footer.jsp" %>
     </body>
 
 </html>

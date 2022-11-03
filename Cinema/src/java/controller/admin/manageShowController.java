@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
 import java.util.List;
 import model.Show;
 
@@ -38,7 +39,7 @@ public class manageShowController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet manageShowController</title>");            
+            out.println("<title>Servlet manageShowController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet manageShowController at " + request.getContextPath() + "</h1>");
@@ -59,8 +60,23 @@ public class manageShowController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String title = request.getParameter("title");
+        String date = request.getParameter("date");
+        String order = request.getParameter("order");
+        String dimesion = request.getParameter("dimesion");
+        Integer page = Integer.parseInt(request.getParameter("page"));
         ShowDao db = new ShowDao();
-        List<Show> shows = db.getShowByCondition("", null, "showId asc", 0, 5);
+        List<Show> shows = db.getShowByCondition(title, date, order + " " + dimesion, page, 10);
+        int count = db.countShowByCondition(title, date);
+        request.setAttribute("total", Math.ceil((double) count / 10));
+        request.setAttribute("show", shows);
+        request.setAttribute("title", title);
+        request.setAttribute("date", date);
+        request.setAttribute("order", order);
+        request.setAttribute("dimesion", dimesion);
+        request.setAttribute("page", page);
+        request.getRequestDispatcher("view/admin/manage_show.jsp").forward(request, response);
+        return;
     }
 
     /**
@@ -74,7 +90,15 @@ public class manageShowController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int showId = Integer.parseInt(request.getParameter("showId"));
+        ShowDao db = new ShowDao();
+        int status = db.updatetatusShow(showId);
+        if (status != 1) {
+            response.sendRedirect("error");
+            return;
+        }
+       response.sendRedirect("manageShowController?title=&date=&order=showId&dimesion=asc&page=1");
+
     }
 
     /**

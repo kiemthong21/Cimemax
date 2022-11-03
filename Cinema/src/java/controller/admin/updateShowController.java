@@ -94,19 +94,15 @@ public class updateShowController extends HttpServlet {
         int room = Integer.parseInt(request.getParameter("room"));
         Date date = Date.valueOf(request.getParameter("date"));
         ShowDao db = new ShowDao();
-        Show s = db.findShow(slot, room, date);
-        if (s != null) {
-            request.setAttribute("mess", new Status(400, "Shows are available at this time, please change the time or room."));
-            doGet(request, response);
-            return;
+        Show s = db.findShow(slot, date);
+
+        int updateShow = db.updateShow(date, slot, film, room, showId);
+        if (updateShow == 1) {
+            response.sendRedirect("manageShowController?title=&date=&order=showId&dimesion=asc&page=1");
         } else {
-            int updateShow = db.updateShow(date, slot, film, room, showId);
-            if (updateShow == 1) {
-                response.sendRedirect("manageShowController");
-            } else {
-                response.getWriter().print("error");
-            }
+            response.getWriter().print("error");
         }
+
     }
 
     /**

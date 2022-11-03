@@ -125,7 +125,7 @@
                                                 <button type="submit" class="btn btn-warning btn-lg ms-3 text-center" style="border-radius: 10px">Submit form</button>
                                             </div>
                                             <p class="mb-5 pb-lg-2 text-center" style="color: #393f81;"> Do you already have an account ? <a
-                                                    href="#!" style="color: #393f81;">Login here</a></p>
+                                                    href="loginController" style="color: #393f81;">Login here</a></p>
                                         </div>
                                     </form>
                                 </div>

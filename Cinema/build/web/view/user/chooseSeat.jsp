@@ -107,19 +107,20 @@
             }
 
         </style>
-
     </head>
+
     <body>
         <!--Header-->
         <%@include file="../component/header.jsp" %>
         <!--Header-->
-
         <section class="about_section layout_padding">
             <div class="container  ">
                 <div class="row">
                     <div class="col-md-12 movie-container">
-                        <h4 class="text-center" style="margin-top: -200px; margin-bottom: 100px;">
-                            Avenger: End Game / Slot: 15:30 / Duration: 120 minute
+                        <h4 class="text-center" style="margin-top: -150px; margin-bottom: 100px;">
+                            Film: ${show.film.title}. <br/>
+                            Slot: ${show.slot.time}. <br/>
+                            Time: ${show.film.time} minute.
                         </h4>
                         <div class="showcase">
                             <div class="status">
@@ -130,8 +131,11 @@
                                 <div class="seat sold"></div>
                                 <small>Sold</small>
                             </div>
+                            <div class="status">
+                                <div class="seat selected"></div>
+                                <small>Selected</small>
+                            </div>
                         </div>
-
                         <div class="containers">
                             <div class="screen"></div>
                             <c:set var="i" value="0"/>
@@ -140,14 +144,9 @@
                                 <div class="row">
                                     <c:forEach var="a" begin="1" end="8" step="1">
                                         <c:set var="i" value="${i = i+1 }"/>
-
-
-
                                         <c:choose>
                                             <c:when test="${i == requestScope.seats.get(index).seatId}">
                                                 <div class="seat sold" id="${i}"></div>
-
-
                                                 <c:if test="${index < size -1}">
                                                     <div hidden="">${index = index + 1}</div>  
                                                 </c:if>
@@ -163,15 +162,14 @@
                             </c:forEach>
 
                         </div>
-                        <p class="text">
-                            You have selected <span id="count">0</span> seat for a price of RS.<span id="total">0</span>
-                        </p>
-                        <button onclick="submit()">
+
+                        <form action="bookingController" method="get" id="formBooking">
+                            <input hidden=""  type="text" id="arrSeat" value="" name="arrSeat"/>
+                            <input hidden="" type="text" value="${show.showId}" name="showId">
+                        </form>
+                        <button class=" mt-5 btn btn-primary" onclick="submit()">
                             Submit
                         </button>
-                        <form action="NewServlet" method="get" id="formBooking">
-                            <input  type="text" id="arrSeat" value="" name="arrSeat"/>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -200,16 +198,13 @@
                 for (var item in arr) {
                     seat = seat + arr[item] + ",";
                 }
+
                 console.log(seat);
                 document.getElementById("arrSeat").value = seat;
                 var form = document.getElementById("formBooking");
                 form.submit();
             }
         </script>
-
-
-
-
         <!--Footer->
         <%@include file="../component/footer.jsp" %>
         <!--Footer-->

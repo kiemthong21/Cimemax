@@ -7,6 +7,7 @@ package controller;
 
 import DAO.MD5;
 import DAO.UserDao;
+import ViewMode.Status;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -81,20 +82,18 @@ public class changePassController extends HttpServlet {
         User user = db.findUser(userId);
         MD5 md5 = new MD5();
         if (!md5.getMd5(opass).equals(user.getPassword())) {
-            request.setAttribute("mess", "Old Password is not correct.");
-            System.out.println("1");
+            request.setAttribute("mess", new Status(400, "Old Password is not correct."));
             request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
             return;
         }
         if (!npass.equals(cpass)) {
-            System.out.println("2");
-            request.setAttribute("mess", "Confirm password does not match the new password.");
+            request.setAttribute("mess", new Status(400, "Confirm password does not match the new password."));
             request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
             return;
         }
         System.out.println("3");
         int statusChangePass = db.updateUser(npass, userId);
-        request.setAttribute("mess", "Change password successfull");
+        request.setAttribute("mess", new Status(200, "Change password successfull."));
         request.getRequestDispatcher("view/user/changePassword.jsp").forward(request, response);
         return;
     }

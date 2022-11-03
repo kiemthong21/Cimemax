@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -72,18 +73,30 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-right">Change Password</h4>
                         </div>
+                        <c:if test="${requestScope.mess != null}"> 
+                            <c:if test="${requestScope.mess.statusCode != 200}">
+                                <div class="alert alert-danger" role="alert">
+                                    ${requestScope.mess.mess}
+                                </div>
+                            </c:if>
+                            <c:if test="${requestScope.mess.statusCode == 200}">
+                                <div class="alert alert-success" role="alert">
+                                    ${requestScope.mess.mess}
+                                </div>
+                            </c:if>
+                        </c:if>                    
                         <form action = "changePassController" method="post">
                             <div class="row mt-3">
                                 <div class="col-md-12"><label class="labels">Old-Password</label>
-                                    <input type="text" class="form-control" required="true"
+                                    <input type="password" class="form-control" required="true"
                                            placeholder="Old-Password" value="" name="opass">
                                 </div>
                                 <div class="col-md-12"><label class="labels">New-Password</label>
-                                    <input type="text" class="form-control" required="true"
+                                    <input type="password" class="form-control" required="true"
                                            placeholder="New-Password" value="" name = "npass">
                                 </div>
                                 <div class="col-md-12"><label class="labels">Confirm-Password</label>
-                                    <input type="text" class="form-control" required="true" 
+                                    <input type="password" class="form-control" required="true" 
                                            placeholder="Confirm-Password" value="" name="cpass">
                                 </div>
                             </div>

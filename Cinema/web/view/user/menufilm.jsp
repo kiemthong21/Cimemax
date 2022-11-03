@@ -38,25 +38,25 @@
                 <div class="filters-content">
                     <div class="row grid">
                         <c:forEach items="${requestScope.films}" var="f">
-                            <div class="col-sm-6 col-lg-4 all pizza">
+                            <div class="col-sm-6 col-lg-4 all ${f.genres.name}">
                                 <div class="box">
                                     <div>
                                         <div class="img-box">
-                                            <img src="images/f1.png" alt="">
+                                            <img src="view/images/${f.image}" alt="">
                                         </div>
                                         <div class="detail-box">
                                             <h5>
-                                                Delicious Pizza
+                                                ${f.title}
                                             </h5>
                                             <p>
-                                                Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
+                                                ${f.description}
                                             </p>
                                             <div class="options">
                                                 <h6>
-                                                    $20
+                                                    Time: ${f.time} minute
                                                 </h6>
-                                                <a href="">
-
+                                                <a href="film?film=${f.filmId}" class="" style="color: black; text-decoration: none">
+                                                    <i class="icon fa fa-solid fa-eye"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -65,11 +65,6 @@
                             </div>
                         </c:forEach>
                     </div>
-                </div>
-                <div class="btn-box">
-                    <a href="">
-                        View More
-                    </a>
                 </div>
             </div>
 
