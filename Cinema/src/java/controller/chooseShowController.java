@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.FilmDao;
 import DAO.ShowDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +12,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import model.Film;
 import model.Show;
 
 /**
@@ -70,8 +72,18 @@ public class chooseShowController extends HttpServlet {
         List<Show> show = db.getShow(movieId, dateNow);
         request.setAttribute("filmId", movieId);
         request.setAttribute("date", date);
+        FilmDao fDao = new FilmDao();
+        Film film = fDao.getFilmByID(movieId);
+        request.setAttribute("film", film);
+        if (show.size() == 0) {
+            request.getRequestDispatcher("view/user/chooseShowMovie.jsp").forward(request, response);
+            return;
+        }
+//        response.getWriter().print(show.size());
+
         request.setAttribute("show", show);
         request.getRequestDispatcher("view/user/chooseShowMovie.jsp").forward(request, response);
+        return;
     }
 
     /**
@@ -86,8 +98,7 @@ public class chooseShowController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int movieId = Integer.valueOf(request.getParameter("filmId"));
-        Date d = Date.valueOf(request.getParameter("date"));
-
+        Date cdate = Date.valueOf(request.getParameter("date"));
         LocalDate now = LocalDate.now();
         Date dateNow = Date.valueOf(now);
         List<Date> date = new ArrayList<>();
@@ -97,12 +108,21 @@ public class chooseShowController extends HttpServlet {
             now = now.plusDays(1);
         }
         ShowDao db = new ShowDao();
-        List<Show> show = db.getShow(movieId, d);
+        List<Show> show = db.getShow(movieId, cdate);
         request.setAttribute("filmId", movieId);
         request.setAttribute("date", date);
-        request.setAttribute("show", show);
+        FilmDao fDao = new FilmDao();
+        Film film = fDao.getFilmByID(movieId);
+        request.setAttribute("film", film);
+        if (show.size() == 0) {
+            request.getRequestDispatcher("view/user/chooseShowMovie.jsp").forward(request, response);
+            return;
+        }
+//        response.getWriter().print(show.size());
 
+        request.setAttribute("show", show);
         request.getRequestDispatcher("view/user/chooseShowMovie.jsp").forward(request, response);
+        return;
     }
 
     /**

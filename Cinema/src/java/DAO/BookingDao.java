@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.BookingDetail;
 import model.Seat;
 
 /*
@@ -114,38 +115,79 @@ public class BookingDao extends DBContext {
         return status;
     }
 
+//    public List<HistoryBooking> getHistoryBooking(int userId) {
+//        List<HistoryBooking> hb = new ArrayList<>();
+//        try {
+//            String sql = "select s.seatName, b.bookingId, f.Title , sh.showDate from seat s left join booking_detail bd on s.seatId = bd.seatId\n"
+//                    + "                            left join booking b on bd.bookingId = b.bookingId \n"
+//                    + "                                   left join show sh on b.showId = sh.showId\n"
+//                    + "								   left join [user] u on b.userId = u.[user_id]\n"
+//                    + "								   left join [Films] f on sh.filmId = f.FilmID\n"
+//                    + "								   where b.userId = ? order by b.bookingId desc";
+//            PreparedStatement stm = connection.prepareCall(sql);
+//            stm.setInt(1, userId);
+//            ResultSet rs = stm.executeQuery();
+//            while (rs.next()) {
+//                HistoryBooking h = new HistoryBooking();
+//                h.setBookingId(rs.getInt("bookingId"));
+//                h.setDate(rs.getDate("showDate"));
+//                h.setFilm(rs.getString("title"));
+//                h.setSeat(rs.getString("seatName"));
+//                hb.add(h);
+//            }
+//            return hb;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(BookingDao.class.getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//
+//    }
     public List<HistoryBooking> getHistoryBooking(int userId) {
-        List<HistoryBooking> hb = new ArrayList<>();
+        List<HistoryBooking> hs = new ArrayList<>();
         try {
-            String sql = "select s.seatName, b.bookingId, f.Title , sh.showDate from seat s left join booking_detail bd on s.seatId = bd.seatId\n"
-                    + "                            left join booking b on bd.bookingId = b.bookingId \n"
-                    + "                                   left join show sh on b.showId = sh.showId\n"
-                    + "								   left join [user] u on b.userId = u.[user_id]\n"
-                    + "								   left join [Films] f on sh.filmId = f.FilmID\n"
-                    + "								   where b.userId = ? order by b.bookingId desc";
+            String sql = "select b.bookingId, f.Title, s.showDate, sl.time from booking b\n"
+                    + "left join Show s on b.showId = s.showId\n"
+                    + "left join Films f on s.filmId = f.FilmID\n"
+                    + "left join Slot sl on s.slotId = sl.slotID\n"
+                    + "where b.userId = ?";
             PreparedStatement stm = connection.prepareCall(sql);
             stm.setInt(1, userId);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 HistoryBooking h = new HistoryBooking();
                 h.setBookingId(rs.getInt("bookingId"));
-                h.setDate(rs.getDate("showDate"));
                 h.setFilm(rs.getString("title"));
-                h.setSeat(rs.getString("seatName"));
-                hb.add(h);
+                h.setDate(rs.getDate("showDate"));
+                h.setTime(rs.getString("time"));
+                List<Seat> seat = new ArrayList<>();
+                String sql2 = "select bd.seatId, seatName from booking_detail bd\n"
+                        + "left join Seat s on bd.seatId = s.seatId where bookingId = ?";
+                PreparedStatement stm2 = connection.prepareCall(sql2);
+                stm2.setInt(1, h.getBookingId());
+                ResultSet rs2 = stm2.executeQuery();
+                while (rs2.next()) {
+                    Seat s = new Seat();
+                    s.setSeatId(rs2.getInt("seatId"));
+                    s.setSeatName(rs2.getString("seatName"));
+                    seat.add(s);
+                }
+                h.setSeat(seat);
+                hs.add(h);
             }
-            return hb;
+
         } catch (SQLException ex) {
             Logger.getLogger(BookingDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-
+        return hs;
     }
 
     public static void main(String[] args) {
         BookingDao db = new BookingDao();
-        List<HistoryBooking> seats = db.getHistoryBooking(3);
-        System.out.println(seats.size());
+//        List<HistoryBooking> seats = db.getHistoryBooking(3);
+//        System.out.println(seats.size());
+        List<HistoryBooking> hs = db.getHistoryBooking(1);
+        System.out.println(hs.get(0).getSeat().size());
 
     }
 

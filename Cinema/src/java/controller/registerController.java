@@ -91,7 +91,7 @@ public class registerController extends HttpServlet {
             request.getRequestDispatcher("view/user/register.jsp").forward(request, response);
             return;
         } else {
-            db.register(name, email, pass, gender, phone, address, 1, null, dob);
+            db.register(name, email, pass, gender, phone, address, 1,  dob);
             response.sendRedirect("loginController");
             return;
         }

@@ -25,6 +25,7 @@
                                 <th scope="col">Booking Code</th>
                                 <th scope="col">Film Title</th>
                                 <th scope="col">Date</th>
+                                <th scope="col">Time</th>
                                 <th scope="col">Seat</th>
                             </tr>
                         </thead>
@@ -34,7 +35,12 @@
                                 <th scope="row">${hs.bookingId}</th>
                                 <th scope="row">${hs.film}</th>
                                 <th scope="row">${hs.date}</th>
-                                <th scope="row">${hs.seat}</th>
+                                <th scope="row">${hs.time}</th>
+                                <th scope="row">
+                                    <c:forEach items="${hs.seat}" var="s">
+                                        ${s.seatName}
+                                    </c:forEach>
+                                </th>
                             </tr>
                         </c:forEach>
                         </tbody>

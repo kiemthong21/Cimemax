@@ -27,13 +27,6 @@
                     </h2>
                 </div>
 
-                <ul class="filters_menu">
-                    <li class="active" data-filter="*">All</li>
-                        <c:forEach items="${requestScope.genres}" var="g">
-                        <li data-filter=".${g.name}">${g.name}</li>
-                        </c:forEach>
-
-                </ul>
 
                 <div class="filters-content">
                     <div class="row grid">

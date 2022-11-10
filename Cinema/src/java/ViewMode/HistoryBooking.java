@@ -6,6 +6,9 @@
 package ViewMode;
 
 import java.sql.Date;
+import java.util.List;
+import model.BookingDetail;
+import model.Seat;
 
 /**
  *
@@ -13,18 +16,37 @@ import java.sql.Date;
  */
 public class HistoryBooking {
     private int bookingId;
-    private String seat;
+    private List<Seat> seat;
     private String film;
+    private String time;
     private Date date;
 
     public HistoryBooking() {
     }
 
-    public HistoryBooking(int bookingId, String seat, String film, Date date) {
+    public HistoryBooking(int bookingId, List<Seat> seat, String film, String time, Date date) {
         this.bookingId = bookingId;
         this.seat = seat;
         this.film = film;
+        this.time = time;
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    
+    public List<Seat> getSeat() {
+        return seat;
+    }
+
+    public void setSeat(List<Seat> seat) {
+        this.seat = seat;
     }
 
     public int getBookingId() {
@@ -33,14 +55,6 @@ public class HistoryBooking {
 
     public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
-    }
-
-    public String getSeat() {
-        return seat;
-    }
-
-    public void setSeat(String seat) {
-        this.seat = seat;
     }
 
     public String getFilm() {

@@ -12,4 +12,30 @@ package model;
 public class BookingDetail {
     private int bookingId;
     private Seat seat;
+
+    public BookingDetail() {
+    }
+
+    public BookingDetail(int bookingId, Seat seat) {
+        this.bookingId = bookingId;
+        this.seat = seat;
+    }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+    
+    
 }

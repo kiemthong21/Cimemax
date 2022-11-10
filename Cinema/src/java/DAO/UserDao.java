@@ -123,8 +123,7 @@ public class UserDao extends DBContext {
     }
 
     public int register(String fullname, String email, String password,
-            boolean gender, String phone, String address, int role,
-            String avatar, Date DOB) {
+            boolean gender, String phone, String address, int role,Date DOB) {
         String pass = md5.getMd5(password);
         try {
             String sql = "INSERT INTO [dbo].[user]\n"
@@ -134,12 +133,10 @@ public class UserDao extends DBContext {
                     + "           ,[gender]\n"
                     + "           ,[phone]\n"
                     + "           ,[address]\n"
-                    + "           ,[role]\n"
-                    + "           ,[avatar]\n"
+                    + "           ,[role]\n"         
                     + "           ,[DOB])\n"
                     + "     VALUES\n"
                     + "           (?\n"
-                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
@@ -155,8 +152,7 @@ public class UserDao extends DBContext {
             stm.setString(5, phone);
             stm.setString(6, address);
             stm.setInt(7, 1);
-            stm.setString(8, null);
-            stm.setDate(9, DOB);
+            stm.setDate(8, DOB);
             stm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -224,6 +220,6 @@ public class UserDao extends DBContext {
 
     public static void main(String[] args) {
         UserDao us = new UserDao();
-        System.out.println(us.totalUser());
+        System.out.println(us.register("123", "thong20@gmail.com", "1", true, "1233333333", "13", 0 , Date.valueOf("2001-01-01")));
     }
 }

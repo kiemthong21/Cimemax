@@ -57,9 +57,14 @@ public class bookingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] arrSeat = request.getParameter("arrSeat").split(",");
         int id = (int) request.getSession().getAttribute("id");
         int showId = Integer.parseInt(request.getParameter("showId"));
+        String seat = request.getParameter("arrSeat");
+        if (seat == null || seat.equals("")) {
+            response.sendRedirect("homeController");
+            return;
+        }
+        String[] arrSeat = seat.split(",");
         BookingDao db = new BookingDao();
         int status = db.bookingSeat(showId, id, arrSeat);
         if (status != 1) {

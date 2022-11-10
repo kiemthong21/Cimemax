@@ -44,9 +44,9 @@
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
                             
-                            <a class="user_link" href="historyBookingController">
+<!--                            <a class="user_link" href="historyBookingController">
                                 <i class="fa fa-ticket" aria-hidden="true" ></i>
-                            </a>
+                            </a>-->
                             
                             <a class="user_link" href="changePassController">
                                 <i class="fa fa-lock" aria-hidden="true" ></i>
